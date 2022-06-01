@@ -1,4 +1,11 @@
-function computerPlay (){
+
+let points = 0;
+let jankenPoints = 0;
+let placar = document.getElementById('points');
+placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
+
+
+    function computerPlay (){
     let number =Math.floor(Math.random()*3+1); //random number between 1 and 3
     let play;
     if (number ===1){
@@ -7,73 +14,124 @@ function computerPlay (){
     }else if(number ===2){
         play = 'paper';
        
-    }else{
+    }else if (number ===3){
         play = 'scissors';
         
     }
     return play;
 }
 
+document.addEventListener('click', playRound);
 
-let playerSelection = theGame(window.prompt('Rock, Paper or Scissors?: '));
 
-function theGame(player){
-
-    let choice = player.toLowerCase();
+function playRound(e) {
+    
+    let result = document.getElementById('result')
+    let choice = e.target.textContent.toLowerCase();
     let computer = computerPlay();
 
-    if(choice === 'paper'){
-        if (computer === 'paper'){
-            
-            console.log('Draw!');
+if (e.target.textContent === 'ROCK' || e.target.textContent === 'PAPER' || e.target.textContent === 'SCISSORS'){
 
-        }else if(computer === 'rock'){
-
-            console.log('Rock ... You WIN!!!');
-     
-        }else {
-
-            console.log('Scissors ...You LOSE!');
-
+    //Logica Jokenpo
+    if(choice = 'paper'){
+        if(computer == 'rock'){
+    
+            if(points < 4){
+                points += 1;   
+                result.textContent = 'Rock! ... You win...'
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
+            }else if(points == 4){
+                points += 1;
+                result.textContent = 'Best of 3?';
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
+            }
+    
+        }else if(computer == 'scissors'){
+    
+            if(jankenPoints < 4){
+                jankenPoints += 1;
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
+                result.textContent = 'Scissors! Ha Ha! You LOSE!'
+            }else if(jankenPoints == 4){
+                jankenPoints += 1;
+                result.textContent = 'Janken the Great is the Greatest and the WINNER!!!'
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
+            }
+        
+    
+        }else{
+            result.textContent = 'Draw';
+            placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
+    
         }
     
-
-    }else if (choice === 'rock'){
-        
-        if (computer === 'paper'){
-
-            console.log('Paper ...You LOSE!');
-
-        }else if(computer==='scissor'){
-
-            console.log('Scissors ... You WIN!!!');
-
+    //Se choice = Pedra
+    }else if(choice == 'rock'){
+        if(computer == 'scissors'){
+    
+            if(points < 4){
+                points += 1;   
+                result.textContent = 'Scissors! ... You win...'
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
+            }else if(points == 4){
+                points += 1;
+                result.textContent = 'Best of 3?';
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
+            }
+    
+        }else if(computer == 'paper'){
+    
+            if(jankenPoints < 4){
+                jankenPoints += 1;
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
+                result.textContent = 'Paper! Ha Ha! You LOSE!'
+            }else if(jankenPoints == 4){
+                jankenPoints += 1;
+                result.textContent = 'Janken the Great is the Greatest and the WINNER!!!'
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
+            }
+    
         }else{
-
-            console.log('Draw!');
-
+    
+            result.textContent = 'Draw';
+            placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
+            
         }
-
-    //choice === scissors    
-    }else if(choice === 'scissors') {
-
-        if(computer === 'paper'){
-
-            console.log('Paper... You WIN!!!');
-
-        }else if (computer === 'rock'){
-
-            console.log('Rock ...You LOSE!');
-
+    
+    //Se choice = tesoura
+    }else if(choice == 'scissors'){
+        if(computer == 'paper'){
+    
+            if(points < 4){
+                points += 1;   
+                result.textContent = 'Paper! ... You win...'
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
+            }else if(points == 4){
+                points += 1;
+                result.textContent = 'Best of 3?';
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
+            }
+    
+        }else if(computer == 'rock'){
+    
+            if(jankenPoints < 4){
+                jankenPoints += 1;
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
+                result.textContent = 'Rock! Ha Ha! You LOSE!'
+            }else if(jankenPoints == 4){
+                jankenPoints += 1;
+                result.textContent = 'Janken the Great is the Greatest and the WINNER!!!'
+                placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
+            }
+    
         }else{
-
-            console.log('Draw!');
+    
+            result.textContent = 'Draw';
+            placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
+            
         }
-
-    }else if (choice!=='paper' && choice !=='rock' && choice !== 'scissors' ){
-        console.log('Invalid option ...please choose again.');
     }
+}else {
+    result.textContent = 'Try clicking on a button ...Einstein'
 }
-
-
-
+} 
