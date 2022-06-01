@@ -3,18 +3,18 @@ let points = 0;
 let jankenPoints = 0;
 let placar = document.getElementById('points');
 placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
-
+result.textContent = 'Choose your weapon';
 
     function computerPlay (){
-    let number =Math.floor(Math.random()*3+1); //random number between 1 and 3
+    let number = Math.floor(Math.random()*3+1); //random number between 1 and 3
     let play;
-    if (number ===1){
+    if (number === 1){
         play = 'rock';
        
-    }else if(number ===2){
+    }else if(number === 2){
         play = 'paper';
        
-    }else if (number ===3){
+    }else if (number === 3){
         play = 'scissors';
         
     }
@@ -29,11 +29,31 @@ function playRound(e) {
     let result = document.getElementById('result')
     let choice = e.target.textContent.toLowerCase();
     let computer = computerPlay();
+    
 
+
+    document.getElementById('tryAgain').addEventListener('click', reseting)
+    
+    //RESTING BUTTON
+    function reseting (e){
+        points = 0;
+        jankenPoints = 0;
+        result.txtContent = 'Rock, paper ou scissors?'
+        placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
+    }
+
+
+
+//Ending game
+if(points == 5 || jankenPoints == 5){
+    return
+
+//playing game
+}else{
 if (e.target.textContent === 'ROCK' || e.target.textContent === 'PAPER' || e.target.textContent === 'SCISSORS'){
 
     //Logica Jokenpo
-    if(choice = 'paper'){
+    if(choice == 'paper'){
         if(computer == 'rock'){
     
             if(points < 4){
@@ -59,7 +79,7 @@ if (e.target.textContent === 'ROCK' || e.target.textContent === 'PAPER' || e.tar
             }
         
     
-        }else{
+        }else if(computer == 'paper'){
             result.textContent = 'Draw';
             placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
     
@@ -91,7 +111,7 @@ if (e.target.textContent === 'ROCK' || e.target.textContent === 'PAPER' || e.tar
                 placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
             }
     
-        }else{
+        }else if (computer == 'rock'){
     
             result.textContent = 'Draw';
             placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
@@ -124,7 +144,7 @@ if (e.target.textContent === 'ROCK' || e.target.textContent === 'PAPER' || e.tar
                 placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`; 
             }
     
-        }else{
+        }else if (computer == 'scissors'){
     
             result.textContent = 'Draw';
             placar.textContent = `You: ${points} Vs Janken The GREAT: ${jankenPoints}`;
@@ -132,6 +152,7 @@ if (e.target.textContent === 'ROCK' || e.target.textContent === 'PAPER' || e.tar
         }
     }
 }else {
-    result.textContent = 'Try clicking on a button ...Einstein'
+    result.textContent = 'Choose your weapon'
 }
 } 
+}
